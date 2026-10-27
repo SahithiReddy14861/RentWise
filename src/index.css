@@ -49,15 +49,15 @@
 /* Subtle scrollbar for compare drawer */
 .scroll-x {
   scrollbar-width: thin;
-  scrollbar-color: #9A6B4F #F0EBE3;
+  scrollbar-color: #496B59 #EFF2ED;
 }
 .scroll-x::-webkit-scrollbar {
   height: 8px;
 }
 .scroll-x::-webkit-scrollbar-thumb {
-  background: #9A6B4F;
+  background: #496B59;
   border-radius: 999px;
 }
 .scroll-x::-webkit-scrollbar-track {
-  background: #F0EBE3;
+  background: #EFF2ED;
 }
