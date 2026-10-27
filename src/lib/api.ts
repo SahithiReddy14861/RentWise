@@ -1,6 +1,9 @@
 import { supabase } from './supabaseClient';
 import type { Property, PropertyFilters } from './types';
 
+const NOT_CONFIGURED =
+  'This site is missing its database connection. Ask the site owner to set the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables and redeploy.';
+
 // Note on favourites: this MVP keeps favourites in localStorage (no auth was
 // requested), so there is no backend table for them. The functions below only
 // handle property listing / filtering / details, matching the requested
@@ -10,6 +13,10 @@ export async function fetchProperties(filters: PropertyFilters): Promise<{
   data: Property[] | null;
   error: string | null;
 }> {
+  if (!supabase) {
+    return { data: null, error: NOT_CONFIGURED };
+  }
+
   let query = supabase
     .from('properties')
     .select('*')
@@ -56,6 +63,10 @@ export async function fetchProperties(filters: PropertyFilters): Promise<{
 export async function fetchPropertyById(
   id: string
 ): Promise<{ data: Property | null; error: string | null }> {
+  if (!supabase) {
+    return { data: null, error: NOT_CONFIGURED };
+  }
+
   const { data, error } = await supabase
     .from('properties')
     .select('*')
